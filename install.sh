@@ -33,6 +33,7 @@ if [ prompt "The home directory and shell (/bin/rbash) must be set in /etc/passw
             echo "$line" >> /etc/passwd.new
     fi
   done < /etc/passwd
+  mkdir /home/mysql-scripts
   cp /etc/passwd /etc/passwd.old
   mv /etc/passwd.new /etc/passwd
 fi
