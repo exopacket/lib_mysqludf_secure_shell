@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <csignal>
+#include <sys/wait.h>
 
 #include "mysql.h"
 #include "mysql/udf_registration_types.h"
