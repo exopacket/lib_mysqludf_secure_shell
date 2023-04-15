@@ -30,18 +30,18 @@ extern "C" unsigned long long sys_exec(UDF_INIT *, UDF_ARGS *args,
     //return system(args->args[0]);
 
     //use restricted shell
-    char* command;
-    strcpy(command, "/bin/rbash -c \"");
-    strcat(command, "echo 1");
-    strcat(command, "\"");
+    int child;
+    int fd[2];
+    pipe(fd);
+    if ( (child = fork() ) == -1){
+        return 1;
+    } else if( child == 0) {
+        dup2(fd[1], 1);
+        close(fd[0]);
+        execlp("/bin/rbash", "/bin/rbash", "-c", args->args[0], NULL);
+    }
+    wait(NULL);
 
-    FILE *p = popen(command,"r");
-    if(p == NULL) return -1;
-
-    char ch;
-    while((ch=fgetc(p)) != EOF) { }
-
-    int status = pclose(p);
-    int exitcode = WEXITSTATUS(status);
+    return 0;
 
 }
