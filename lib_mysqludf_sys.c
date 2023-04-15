@@ -20,7 +20,7 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #if defined(_WIN32) || defined(_WIN64) || defined(__WIN32__) || defined(WIN32)
-#define DLLEXP __declspec(dllexport) 
+#define DLLEXP __declspec(dllexport)
 #else
 #define DLLEXP
 #endif
@@ -50,140 +50,8 @@ extern "C" {
 #ifdef __WIN__
 #define SETENV(name,value)		SetEnvironmentVariable(name,value);
 #else
-#define SETENV(name,value)		setenv(name,value,1);		
+#define SETENV(name,value)		setenv(name,value,1);
 #endif
-
-DLLEXP 
-my_bool lib_mysqludf_sys_info_init(
-	UDF_INIT *initid
-,	UDF_ARGS *args
-,	char *message
-);
-
-DLLEXP 
-void lib_mysqludf_sys_info_deinit(
-	UDF_INIT *initid
-);
-
-DLLEXP 
-char* lib_mysqludf_sys_info(
-	UDF_INIT *initid
-,	UDF_ARGS *args
-,	char* result
-,	unsigned long* length
-,	char *is_null
-,	char *error
-);
-
-/**
- * sys_get
- * 
- * Gets the value of the specified environment variable.
- */
-DLLEXP 
-my_bool sys_get_init(
-	UDF_INIT *initid
-,	UDF_ARGS *args
-,	char *message
-);
-
-DLLEXP 
-void sys_get_deinit(
-	UDF_INIT *initid
-);
-
-DLLEXP 
-char* sys_get(
-	UDF_INIT *initid
-,	UDF_ARGS *args
-,	char* result
-,	unsigned long* length
-,	char *is_null
-,	char *error
-);
-
-/**
- * sys_set
- * 
- * Sets the value of the environment variables.
- * This function accepts a set of name/value pairs
- * which are then set as environment variables.
- * Use sys_get to retrieve the value of such a variable 
- */
-DLLEXP 
-my_bool sys_set_init(
-	UDF_INIT *initid
-,	UDF_ARGS *args
-,	char *message
-);
-
-DLLEXP 
-void sys_set_deinit(
-	UDF_INIT *initid
-);
-
-DLLEXP 
-long long sys_set(
-	UDF_INIT *initid
-,	UDF_ARGS *args
-,	char *is_null
-,	char *error
-);
-
-/**
- * sys_exec
- * 
- * executes the argument commandstring and returns its exit status.
- * Beware that this can be a security hazard.
- */
-DLLEXP 
-my_bool sys_exec_init(
-	UDF_INIT *initid
-,	UDF_ARGS *args
-,	char *message
-);
-
-DLLEXP 
-void sys_exec_deinit(
-	UDF_INIT *initid
-);
-
-DLLEXP 
-my_ulonglong sys_exec(
-	UDF_INIT *initid
-,	UDF_ARGS *args
-,	char *is_null
-,	char *error
-);
-
-/**
- * sys_eval
- * 
- * executes the argument commandstring and returns its standard output.
- * Beware that this can be a security hazard.
- */
-DLLEXP 
-my_bool sys_eval_init(
-	UDF_INIT *initid
-,	UDF_ARGS *args
-,	char *message
-);
-
-DLLEXP 
-void sys_eval_deinit(
-	UDF_INIT *initid
-);
-
-DLLEXP 
-char* sys_eval(
-	UDF_INIT *initid
-,	UDF_ARGS *args
-,	char* result
-,	unsigned long* length
-,	char *is_null
-,	char *error
-);
-
 
 #ifdef	__cplusplus
 }
