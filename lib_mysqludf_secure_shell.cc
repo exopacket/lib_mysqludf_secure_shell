@@ -1,4 +1,3 @@
-#include <assert.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,5 +25,22 @@ extern "C" bool sys_exec_init(UDF_INIT *initid, UDF_ARGS *args,
 
 extern "C" unsigned long long sys_exec(UDF_INIT *, UDF_ARGS *args,
                                 unsigned char *is_null, unsigned char *) {
-    return system(args->args[0]);
+
+    //use default shell
+    //return system(args->args[0]);
+
+    //use restricted shell
+    char* command;
+    strcpy(command, "/bin/rbash ");
+    strcat(command, args->args[0]);
+
+    FILE *p = popen(command,"r");
+    if(p == NULL) return -1
+
+    while((ch=fgetc(p)) != EOF) { }
+
+    int status = pclose(p);
+    int exitcode = WEXITSTATUS(status);
+    return exitcode;
+
 }
