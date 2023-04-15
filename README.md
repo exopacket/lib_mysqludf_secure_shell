@@ -1,6 +1,5 @@
 # lib_mysqludf_secure_shell
 
-<strong>Working, but still in progress</strong> (rbash-test branch shows new direction)<br>
 This library will allow mysql to run scripts on your system using a secure restricted shell.
 
 # Requirements
