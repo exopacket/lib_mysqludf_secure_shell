@@ -7,9 +7,7 @@ mkdir "${CWD}/build"
 cd "${CWD}/build" && cmake "${CWD}" && cmake --build "${CWD}/build" && cmake --install "${CWD}/build"
 
 if test $? -ne 0; then
-	echo "ERROR: You need libmysqlclient development software installed "
-	echo "to be able to compile this UDF, on Debian/Ubuntu just run:"
-	echo "apt-get install libmysqlclient15-dev"
+	echo "ERROR: Compilation error"
 	exit 1
 else
 	echo "MySQL UDF compiled successfully"
@@ -17,7 +15,7 @@ fi
 
 echo -e "\nPlease provide your MySQL root password"
 
-mysql -u root -p mysql < "${CWD}/lib_mysqludf_sys.sql"
+mysql -u root -p mysql < "${CWD}/lib_mysqludf_secure_shell.sql"
 
 if test $? -ne 0; then
 	echo "ERROR: unable to install the UDF"
