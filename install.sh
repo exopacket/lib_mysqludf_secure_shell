@@ -2,6 +2,7 @@
 
 echo "Compiling the MySQL UDF"
 CWD=$(pwd)
+rm -rf "${CWD}/build"
 mkdir "${CWD}/build"
 cd "${CWD}/build" && cmake "${CWD}" && cmake --build "${CWD}/build" && cmake --install "${CWD}/build"
 
