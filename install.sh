@@ -23,7 +23,7 @@ else
 	echo "MySQL UDF compiled successfully"
 fi
 
-if [ prompt "The home directory and shell (/bin/rbash) must be set in /etc/passwd. Would you like to set that now?" -eq 0 ]; then
+if prompt "The home directory and shell (/bin/rbash) must be set in /etc/passwd. Would you like to set that now?"; then
   printf "" > /etc/passwd.new
   while read line; do
     IFS=':' read -ra ADDR <<< "$line"

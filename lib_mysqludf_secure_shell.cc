@@ -35,8 +35,9 @@ extern "C" unsigned long long sys_exec(UDF_INIT *, UDF_ARGS *args,
     strcat(command, args->args[0]);
 
     FILE *p = popen(command,"r");
-    if(p == NULL) return -1
+    if(p == NULL) return -1;
 
+    char ch;
     while((ch=fgetc(p)) != EOF) { }
 
     int status = pclose(p);
