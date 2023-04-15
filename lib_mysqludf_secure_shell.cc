@@ -31,8 +31,9 @@ extern "C" unsigned long long sys_exec(UDF_INIT *, UDF_ARGS *args,
 
     //use restricted shell
     char* command;
-    strcpy(command, "/bin/rbash ");
-    strcat(command, args->args[0]);
+    strcpy(command, "/bin/rbash -c \"");
+    strcat(command, "echo 1");
+    strcat(command, "\"");
 
     FILE *p = popen(command,"r");
     if(p == NULL) return -1;
@@ -42,6 +43,5 @@ extern "C" unsigned long long sys_exec(UDF_INIT *, UDF_ARGS *args,
 
     int status = pclose(p);
     int exitcode = WEXITSTATUS(status);
-    return exitcode;
 
 }
