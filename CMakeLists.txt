@@ -11,6 +11,7 @@ find_library(MySQL mysql PATHS /usr)
 
 add_library(lib_mysqludf_exec SHARED lib_mysqludf_exec.cc)
 
+target_compile_options(lib_mysqludf_exec PRIVATE -DMYSQL_DYNAMIC_PLUGIN)
 set_target_properties(lib_mysqludf_exec PROPERTIES PREFIX "")
 
 install(TARGETS lib_mysqludf_exec LIBRARY DESTINATION /usr/lib/mysql/plugins)
