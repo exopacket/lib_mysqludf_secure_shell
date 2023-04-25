@@ -40,7 +40,7 @@ extern "C" unsigned long long sys_exec(UDF_INIT *, UDF_ARGS *args,
     } else if( child == 0) {
         dup2(fd[1], 1);
         close(fd[0]);
-        execlp("/bin/rbash", "/bin/rbash", "-c", args->args[0], NULL);
+        execlp("/usr/bin/rbash", args->args[0]);
     }
     wait(NULL);
 

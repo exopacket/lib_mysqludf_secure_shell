@@ -23,12 +23,12 @@ else
 	echo "MySQL UDF compiled successfully"
 fi
 
-if prompt "The home directory and shell (/bin/rbash) for the mysql user must be set in /etc/passwd. Would you like to set that now?"; then
+if prompt "The home directory for the mysql user must be set in /etc/passwd. Would you like to set that now?"; then
   printf "" > /etc/passwd.new
   while read line; do
     IFS=':' read -ra ADDR <<< "$line"
     if [[ "${ADDR[0]}" = "mysql" ]]; then
-            echo "${ADDR[0]}:${ADDR[1]}:${ADDR[2]}:${ADDR[3]}:${ADDR[4]}:/mysql-scripts:/bin/rbash" >> /etc/passwd.new
+            echo "${ADDR[0]}:${ADDR[1]}:${ADDR[2]}:${ADDR[3]}:${ADDR[4]}:/mysql-scripts:/${ADDR[6]}" >> /etc/passwd.new
     else
             echo "$line" >> /etc/passwd.new
     fi
