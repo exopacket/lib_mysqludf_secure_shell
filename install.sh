@@ -37,12 +37,14 @@ if prompt "The home directory for the mysql user must be set in /etc/passwd. Wou
   while read line; do
     IFS=':' read -ra ADDR <<< "$line"
     if [[ "${ADDR[0]}" = "mysql" ]]; then
-            echo "${ADDR[0]}:${ADDR[1]}:${ADDR[2]}:${ADDR[3]}:${ADDR[4]}:/home/mysql-scripts:/${ADDR[6]}" >> /etc/passwd.new
+            echo "${ADDR[0]}:${ADDR[1]}:${ADDR[2]}:${ADDR[3]}:${ADDR[4]}:/home/mysql-scripts:${ADDR[6]}" >> /etc/passwd.new
     else
             echo "$line" >> /etc/passwd.new
     fi
   done < /etc/passwd
   mkdir /home/mysql-scripts
+  echo 'cd "$HOME"' > /home/mysql-scripts/.bash_profile
+  chmod 0755 /home/mysql-scripts/.bash_profile
   cp /etc/passwd /etc/passwd.old
   mv /etc/passwd.new /etc/passwd
 fi
